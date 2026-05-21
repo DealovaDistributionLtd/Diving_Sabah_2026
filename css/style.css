@@ -76,3 +76,30 @@ header { position: sticky; top: 0; z-index: 99; background: #fff; box-shadow: 0 
   .hamburger { display: block; } 
   .site-logo { height: 40px; } /* 移动端 logo 稍小一点 */
 }
+.sticky-cta{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    z-index: 9999;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+}
+
+.cta-primary, .cta-secondary{
+    flex: 1;
+    text-align: center;
+    padding: 14px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-primary{
+    background: #00c2d1;
+}
+
+.cta-secondary{
+    background: #111;
+}
