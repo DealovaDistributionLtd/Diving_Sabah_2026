@@ -160,3 +160,37 @@ header {
 
 .cta-primary { background:var(--main); }
 .cta-secondary { background:#111; }
+/* FIX: ensure hero image works properly */
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* FIX: prevent overlay text breaking on mobile */
+@media(max-width:768px){
+  .sipadan-overlay{
+    padding:25px !important;
+  }
+
+  .hero-content h1{
+    font-size:22px;
+  }
+}
+
+/* FIX: lightbox image safety */
+.lightbox img{
+  max-width:95%;
+  max-height:90vh;
+  object-fit:contain;
+}
+
+/* FIX: sticky CTA safe height for mobile */
+.sticky-cta{
+  height:60px;
+}
+
+/* FIX: prevent overlap with floating wechat button */
+.floating-wechat{
+  bottom:80px;
+}
