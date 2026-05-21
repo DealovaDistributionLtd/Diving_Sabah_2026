@@ -1,117 +1,229 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>仙本那潜水与跳岛 | Semporna Tours - Coach Deso_89</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>仙本那潜水与跳岛 | Semporna Tours - Coach Deso_89</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Hero Styling */
+        .hero { position: relative; min-height: 65vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; background: #000; overflow: hidden; }
+        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)); z-index: 2; }
+        .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+        @keyframes zoom { from { transform: scale(1); } to { transform: scale(1.1); } }
+        .hero-zoom img { animation: zoom 20s infinite alternate; }
+        .hero-content { position: relative; z-index: 3; max-width: 900px; padding: 20px; }
+        
+        /* Grid and Cards */
+        .grid { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .card { background: var(--card); padding: 35px; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; transition: .35s; display: flex; flex-direction: column; justify-content: space-between; }
+        .card:hover { transform: translateY(-10px); }
+        .card-btn { display: inline-block; background: var(--main); color: #fff; font-weight: 700; padding: 12px 28px; border-radius: 30px; border: none; cursor: pointer; margin-top: 15px; text-decoration: none; transition: 0.3s; }
+        .card-btn:hover { opacity: 0.9; transform: scale(1.05); }
 
-<link rel="stylesheet" href="style.css">
+        /* SIPADAN MAP CARD STYLING */
+        .sipadan-section { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .sipadan-card {
+            position: relative;
+            height: 400px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            background: #000;
+        }
+        .sipadan-bg { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; opacity: 0.7; }
+        .sipadan-card:hover .sipadan-bg { transform: scale(1.1); opacity: 0.5; }
+        
+        .sipadan-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(to right, rgba(0,0,0,0.8) 40%, transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 50px;
+            color: #fff;
+        }
+        .sipadan-overlay h2 { margin: 10px 0; font-size: 2.2rem; }
+        .sipadan-overlay p { opacity: 0.9; line-height: 1.6; max-width: 500px; }
+        .zoom-hint {
+            margin-top: 25px;
+            font-weight: bold;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
 
-<!-- your original styles stay untouched -->
-<style>
-/* KEEP YOUR ORIGINAL CSS EXACTLY AS IS */
-</style>
+        /* XHS Promo */
+        .xhs-promo { max-width: 1100px; margin: 40px auto; padding: 40px; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); display: flex; align-items: center; gap: 40px; }
+        .xhs-badge { display: inline-block; background: #ff2442; color: #fff; padding: 5px 12px; border-radius: 8px; font-weight: bold; font-size: 0.8rem; margin-bottom: 15px; }
+        .xhs-preview { flex: 0.8; position: relative; max-width: 350px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(255, 36, 66, 0.15); }
+        .xhs-preview img { width: 100%; height: auto; display: block; transition: 0.5s; }
+        
+        /* CTA Section */
+        .cta-section { background: linear-gradient(135deg, #00c2d1, #0096a6); color: #fff; text-align: center; border-radius: 26px; padding: 80px 20px; margin: 40px auto; max-width: 1100px; }
+        .btn-white { background: #fff; color: var(--main); padding: 14px 32px; border-radius: 30px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block; }
 
+        /* Lightbox for Map */
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 3000; padding: 20px; }
+        .lightbox img { max-width: 95%; max-height: 90vh; border-radius: 8px; }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 3rem; cursor: pointer; }
+
+        @media(max-width: 768px) {
+            .xhs-promo { flex-direction: column; text-align: center; }
+            .sipadan-overlay { padding: 30px; background: rgba(0,0,0,0.6); align-items: center; text-align: center; }
+            .sipadan-overlay h2 { font-size: 1.6rem; }
+        }
+    </style>
 </head>
-
 <body>
 
 <header>
-<nav class="nav-container">
-<a href="index.html" class="logo-box">
-<img src="images/logo.png" class="site-logo">
-</a>
-
-<div class="nav-links">
-<a href="index.html" class="active">首页 / Home</a>
-<a href="pricing.html">价格 / Pricing</a>
-<a href="accommodation.html">住宿 / Accommodation</a>
-<a href="gallery.html">相册 / Gallery</a>
-<a href="reviews.html">评价 / Reviews</a>
-<a href="about.html">关于 / About</a>
-<a href="contact.html">联系 / Contact</a>
-<button id="langToggleDesktop" class="lang-btn">🇨🇳 / 🇬🇧</button>
-</div>
-
-<button class="hamburger" id="hamburger">&#9776;</button>
-</nav>
+    <nav class="nav-container">
+        <a href="index.html" class="logo-box">
+            <img src="images/logo.png" alt="Semporna Tours Logo" class="site-logo">
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="active">首页 / Home</a>
+            <a href="pricing.html">价格 / Pricing</a>
+            <a href="accommodation.html">住宿 / Accommodation</a>
+            <a href="gallery.html">相册 / Gallery</a>
+            <a href="reviews.html">评价 / Reviews</a>
+            <a href="about.html">关于 / About</a>
+            <a href="contact.html">联系 / Contact</a>
+            <button id="langToggleDesktop" class="lang-btn">🇨🇳 / 🇬🇧</button>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero hero-zoom">
-<img src="images/islands/dji-20241120095919-0020-d_orig.jpg">
-<div class="hero-content">
-<h1 class="cn">第一次来仙本那？跟着我这样玩！</h1>
-<p class="cn">跳岛游 · 深潜 · PADI课程</p>
-<a href="pricing.html" class="card-btn">查看价格</a>
-</div>
+    <img src="images/islands/dji-20241120095919-0020-d_orig.jpg" alt="Semporna Sea">
+    <div class="hero-content">
+        <h1 class="cn">第一次来仙本那？跟着我这样玩！</h1>
+        <h1 class="en hidden">First Time in Semporna? Play Like This!</h1>
+        <p class="cn">跳岛游 · 深潜 · PADI 潜水课程<br>果冻海 × 世界级潜点 × 当地专业向导</p>
+        <p class="en hidden">Island Hopping · Deep Diving · PADI Courses<br>World-class dive sites × Local certified guides</p>
+        <a href="pricing.html" class="card-btn" style="padding: 15px 40px; margin-top: 25px;">查看价格 / See Pricing</a>
+    </div>
 </section>
 
-<!-- YOUR CONTENT STAYS SAME -->
-<!-- (cards, sipadan, xhs promo etc untouched) -->
+<section style="max-width: 1100px; margin: auto; padding: 60px 20px;">
+    <div class="grid">
+        <div class="card">
+            <div>
+                <h3 class="cn">🏝️ 跳岛游路线</h3>
+                <h3 class="en hidden">🏝️ Island Hopping</h3>
+                <p class="cn">敦沙卡兰、马布岛、马达京。包含餐饮与接送。</p>
+                <p class="en hidden">Route A, B, and C. Includes lunch & transfers.</p>
+            </div>
+            <a href="pricing.html#hopping" class="card-btn">了解更多 / More</a>
+        </div>
+        <div class="card">
+            <div>
+                <h3 class="cn">🤿 考证与深潜</h3>
+                <h3 class="en hidden">🤿 Scuba Diving</h3>
+                <p class="cn">PADI OW/AOW 课程，资深教练小班授课。</p>
+                <p class="en hidden">PADI OW/AOW Courses. Small groups for maximum safety.</p>
+            </div>
+            <a href="pricing.html#diving" class="card-btn">了解课程 / Courses</a>
+        </div>
+        <div class="card">
+            <div>
+                <h3 class="cn">🏠 梦幻水上屋</h3>
+                <h3 class="en hidden">🏠 Overwater Stay</h3>
+                <p class="cn">为您挑选视野最佳的度假村，推窗即是大海。</p>
+                <p class="en hidden">Best ocean-view villas and overwater house selections.</p>
+            </div>
+            <a href="accommodation.html" class="card-btn">查看住宿 / View Stay</a>
+        </div>
+    </div>
+</section>
 
-<!-- SIPADAN -->
 <section class="sipadan-section">
-<div class="sipadan-card" onclick="openMapLightbox('images/Sipadan Map.jpeg')">
-
-<img src="images/Sipadan Map.jpeg" class="sipadan-bg">
-
-<div class="sipadan-overlay">
-<h2 class="cn">西巴丹岛潜点分布图</h2>
-<p class="cn">点击查看高清地图</p>
-</div>
-
-</div>
+    <div class="sipadan-card" onclick="openMapLightbox('images/Sipadan Map.jpeg')">
+        <div class="sipadan-overlay">
+            <div class="xhs-badge" style="background: var(--main);">朝圣之地 / The Holy Grail</div>
+            <h2 class="cn">西巴丹岛潜点分布图</h2>
+            <h2 class="en hidden">Sipadan Island Dive Sites Map</h2>
+            <p class="cn">探秘世界顶级潜点：海狼风暴、杰克鱼风暴、玳瑁龟的天堂。点击查看高清大图。</p>
+            <p class="en hidden">Explore world-class dive sites: Barracuda Point, Turtle Tomb, and more. Click to enlarge map.</p>
+            <div class="zoom-hint">🔍 <span class="cn">点击查看高清地图</span><span class="en hidden">Click to Enlarge Map</span></div>
+        </div>
+        <img src="images/Sipadan Map.jpeg" alt="Sipadan Map" class="sipadan-bg">
+    </div>
 </section>
 
-<!-- LIGHTBOX -->
+<section class="xhs-promo">
+    <div class="xhs-preview">
+        <a href="https://xhslink.com/m/2nU4fzy4Tf" target="_blank">
+             <img src="images/islands/WhatsApp Image 2025-12-29 at 09.15.56 (2).jpeg" alt="Semporna Tour Redbook">
+        </a>
+    </div>
+    <div class="xhs-content">
+        <div class="xhs-badge">小红书 / Little Red Book</div>
+        <h2 class="cn">在小红书发现我们</h2>
+        <h2 class="en hidden">Discover Us on Redbook</h2>
+        <p class="cn">查看真实的客片实拍、旅游攻略和最前线的仙本那果冻海实况！</p>
+        <p class="en hidden">Check out real guest photos, travel tips, and live Semporna jelly-sea updates!</p>
+        <p style="font-weight: bold; margin-top: 15px; color: #ff2442;">ID: Deso_89</p>
+        <a href="https://xhslink.com/m/2nU4fzy4Tf" target="_blank" class="card-btn" style="background: #ff2442;">
+            <span class="cn">去看看</span><span class="en hidden">Take a Look</span>
+        </a>
+    </div>
+</section>
+
+<section class="cta-section">
+    <h2 class="cn">准备好出发了吗？</h2>
+    <h2 class="en hidden">Ready to Play?</h2>
+    <p class="cn" style="margin-bottom: 30px; opacity: 0.9;">专业资深教练，为您定制专属行程</p>
+    <p class="en hidden" style="margin-bottom: 30px; opacity: 0.9;">Expert local guide. Let us plan your perfect trip.</p>
+    <button onclick="openWechat()" class="btn-white">立即添加微信 / Add WeChat</button>
+</section>
+
+<footer style="text-align:center; padding:40px 20px; background: #eee;">
+    <p>© Semporna Tours - Coach Deso_89</p>
+</footer>
+
 <div id="mapLightbox" class="lightbox" onclick="closeMapLightbox()">
-<span class="lightbox-close">&times;</span>
-<img id="mapLightboxImg">
+    <span class="lightbox-close">&times;</span>
+    <img id="mapLightboxImg" src="">
 </div>
 
-<!-- FLOAT WECHAT -->
 <div class="floating-wechat" onclick="openWechat()">
-<img src="images/wechat-icon.png">
+    <img src="images/wechat-icon.png" alt="WeChat">
 </div>
 
-<!-- WECHAT POPUP -->
 <div id="wechatPopup" class="wechat-popup">
-<div class="wechat-box">
-<p class="cn">扫码添加微信</p>
-<img src="images/wechat-qr.jpg">
-<br>
-<button onclick="closeWechat()">Close</button>
-</div>
+    <div class="wechat-box">
+        <p class="cn">扫码添加微信获取行程建议</p>
+        <img src="images/wechat-qr.jpg" alt="WeChat QR">
+        <br><strong>教练 Deso_89</strong><br>
+        <button onclick="closeWechat()" class="card-btn" style="background: #666;">Close</button>
+    </div>
 </div>
 
-<!-- ✅ FIXED SCRIPT (ONLY CLEAN FIXES) -->
+<script src="main.js"></script>
 <script>
-function openMapLightbox(src){
-  document.getElementById('mapLightboxImg').src = src;
-  document.getElementById('mapLightbox').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
+    function openMapLightbox(src) {
+        document.getElementById('mapLightboxImg').src = src;
+        document.getElementById('mapLightbox').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMapLightbox() {
+        document.getElementById('mapLightbox').style.display = 'none';
+        document.body.style.overflow = '';
+    }
 
-function closeMapLightbox(){
-  document.getElementById('mapLightbox').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-function openWechat(){
-  document.getElementById('wechatPopup').style.display = 'flex';
-}
-
-function closeWechat(){
-  document.getElementById('wechatPopup').style.display = 'none';
-}
-</script>
-
-<!-- ✅ FIXED: sticky CTA MUST NOT BE INSIDE SCRIPT -->
-<div class="sticky-cta">
-<a href="javascript:openWechat()" class="cta-primary">💬 微信咨询</a>
-<a href="pricing.html" class="cta-secondary">📅 查看套餐</a>
+    <div class="sticky-cta">
+    <a href="javascript:openWechat()" class="cta-primary">💬 微信咨询</a>
+    <a href="pricing.html" class="cta-secondary">📅 查看套餐</a>
 </div>
-
+</script>
 </body>
 </html>
